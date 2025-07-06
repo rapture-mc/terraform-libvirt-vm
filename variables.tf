@@ -4,6 +4,12 @@ variable "os_img_url" {
   default     = "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
 }
 
+variable "cloudinit_enabled" {
+  description = "Whether to use cloudinit"
+  type        = bool
+  default     = false
+}
+
 variable "uefi_enabled" {
   description = "Whether to use UEFI"
   type        = bool

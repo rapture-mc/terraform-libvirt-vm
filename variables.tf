@@ -4,6 +4,18 @@ variable "os_img_url" {
   default     = "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
 }
 
+variable "uefi_firmware" {
+  description = "Whether to use UEFI"
+  type        = bool
+  default     = false
+}
+
+variable "firmware" {
+  description = "Path to the OVMF firmware file for UEFI"
+  type        = string
+  default     = null
+}
+
 variable "base_volume_name" {
   description = "Name of base OS image"
   type        = string

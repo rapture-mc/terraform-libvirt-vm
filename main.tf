@@ -17,6 +17,7 @@ resource "libvirt_domain" "virt-machine" {
   }
   vcpu       = var.vcpu
   autostart  = var.autostart
+  firmware   = var.uefi_enabled ? var.firmware : null
   qemu_agent = true
 
   cloudinit = element(libvirt_cloudinit_disk.commoninit[*].id, count.index)

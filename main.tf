@@ -20,8 +20,6 @@ resource "libvirt_domain" "virt-machine" {
   firmware   = var.uefi_enabled ? var.firmware : null
   qemu_agent = true
 
-  cloudinit = var.cloudinit_enabled ? element(libvirt_cloudinit_disk.commoninit[*].id, count.index) : null
-
   network_interface {
     bridge         = var.bridge
     wait_for_lease = true
@@ -69,22 +67,5 @@ resource "libvirt_domain" "virt-machine" {
     type        = var.graphics
     listen_type = "address"
     autoport    = true
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "echo \"Virtual Machine \"$(hostname)\" is UP!\"",
-      "date"
-    ]
-    connection {
-      type                = "ssh"
-      user                = var.ssh_admin
-      host                = self.network_interface[0].addresses[0]
-      private_key         = try(file(var.ssh_private_key), var.ssh_private_key, null)
-      timeout             = "2m"
-      bastion_host        = var.bastion_host
-      bastion_user        = var.bastion_user
-      bastion_private_key = try(file(var.bastion_ssh_private_key), var.bastion_ssh_private_key, null)
-    }
   }
 }

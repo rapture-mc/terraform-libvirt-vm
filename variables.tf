@@ -4,7 +4,7 @@ variable "os_img_url" {
   default     = "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
 }
 
-variable "uefi_firmware" {
+variable "uefi_enabled" {
   description = "Whether to use UEFI"
   type        = bool
   default     = false
